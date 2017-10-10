@@ -5,6 +5,7 @@
 export ZSH=/Users/anthonysallows/.oh-my-zsh
 # export PKG_CONFIG_PATH="/usr/local/Cellar/imagemagick/7.0.4-5/lib/pkgconfig/MagickWand.pc"
 # export PKG_CONFIG_PATH="/usr/local/Cellar/imagemagick/7.0.4-5/lib/pkgconfig/MagickWand.pc"
+export PATH=/Applications/:$PATH
 
 
 
@@ -55,7 +56,7 @@ ZSH_THEME="muse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(rails chucknorris rake)
+plugins=(rails chucknorris rake git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,8 +97,8 @@ ulimit -u 2048
 
  alias g="git"
  alias zoom="echo 'https://zoom.us/j/3062305118'"
- alias pgup='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
- alias pgrestart='pg_ctl restart -D /usr/local/var/postgres'
+ alias pgup='pg_ctl -D /usr/local/var/postgresql@9.4 start'
+ alias pgrestart='pg_ctl restart -D /usr/local/var/postgresql@9.4'
  alias pow="powder"
  alias powenv="ln -s ~/.powenv .powenv"
  alias dbconfcp="cp ~/database.yml config/database.yml"
@@ -106,15 +107,32 @@ ulimit -u 2048
 
  alias go="git open"
  alias put='git push origin HEAD'
+ alias putlab='git push gitlab HEAD'
  alias be="bundle exec"
  alias dbredo="rake db:drop db:create db:schema:load db:migrate db:fixtures:load db:test:prepare"
  alias migstat="rake db:migrate:status"
  alias raketasks="rake -t | less"
+
  alias prodrc="heroku run rails c --app brivity"
+ alias prodlogs="heroku logs --tail --app brivity"
+
  alias stagerc="heroku run rails c --app brivity-staging"
  alias stagelogs="heroku logs --tail --app brivity-staging"
- alias stagebash="heroku run bash --app brivity-staging"
- alias v="vi"
+
+ alias supportrc="heroku run rails c --app brivity-support"
+ alias supportlogs="heroku logs --tail --app brivity-support"
+
+ alias acceptancerc="heroku run rails c --app brivity-acceptance"
+ alias acceptancelogs="heroku logs --tail --app brivity-acceptance"
+
+ alias v="vim"
+ alias lc='colorls -r'
+
+ alias core="cd ~/brivity-core"
+ alias bvs="cd ~/brivity-valuations"
+ alias marketing="cd ~/brivity-marketing"
+ alias notifications="cd ~/notifications"
+ alias cma="cd ~/brivity-cma"
 
 # disable ctrl-s so can save in vim
 stty -ixon
@@ -135,6 +153,7 @@ function mkcdir ()
 }
 
 # entertain and enlighten
+echo "antmachine" | figlet | lolcat
 fortune | cowsay
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -173,3 +192,6 @@ function work_in_progress() {
 export NVM_DIR="/Users/anthonysallows/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
+export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"

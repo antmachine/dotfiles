@@ -1,6 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
-set t_Co=256                  " set vim for 256 colored terms
+" set t_Co=256                  " set vim for 256 colored terms
+set termguicolors
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -32,7 +33,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'wincent/command-t'
+Plugin 'rizzatti/dash.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/nerdtree'
@@ -43,6 +44,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'ap/vim-css-color'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-rails'
@@ -51,22 +53,25 @@ Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-ragtag'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-vinegar'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'shime/vim-livedown'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'thoughtbot/vim-rspec'
+Plugin 'janko-m/vim-test'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'ddrscott/vim-side-search'
-Plugin 'adamlowe/vim-slurper'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mxw/vim-jsx'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'reedes/vim-lexical'
 Plugin 'szw/vim-tags'
 Plugin 'craigemery/vim-autotag'
 Plugin 'Shougo/denite.nvim'
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'vim-scripts/genutils'
+Plugin 'Yggdroot/indentLine'
 Plugin 'vim-scripts/Nibble'
 Plugin 'vim-scripts/TeTrIs.vim'
 " vim-tmux
@@ -92,7 +97,15 @@ filetype plugin indent on    " required
 
 set encoding=utf-8
 syntax on
-colorscheme Monokai
+" colorscheme pencil
+colorscheme PaperColor
+let g:pencil_gutter_color = 1 
+augroup lexical
+  autocmd!
+  autocmd FileType markdown,mkd call lexical#init()
+  autocmd FileType textile call lexical#init()
+  autocmd FileType rb call lexical#init()
+augroup END
 let g:airline_theme='distinguished'
 " get special font glyphs
 let g:airline_powerline_fonts = 1
@@ -100,6 +113,7 @@ let g:airline_powerline_fonts = 1
 " set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
+set hlsearch      " highlight the searched term
 " set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands"
 
@@ -166,6 +180,15 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" this doesn't seem to work
+set spelllang=en
+set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+
+" relative line numbers
+" set relativenumber
+" faster scrolling
+" set lazyredraw
+
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
@@ -174,6 +197,9 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 " get buffer list with ctrl-b
 map <C-b> :CtrlPBuffer<CR>
+
+" have tag definitions open in new tab
+:nnoremap <silent><C-]> <C-w><C-]><C-w>T
 
 " make whitespace obvious
 set listchars=nbsp:¬,tab:»·,trail:˷
@@ -196,6 +222,9 @@ imap <C-t> <%= %><Left><Left><Left>
 
 " pry snippet
 iab pry binding.pry
+
+" pry snippet
+iab bye byebug
 
 " tn makes a new empty tab
 cab tn tabnew
@@ -239,10 +268,9 @@ vnoremap > >gv
 " Make vaa select the entire file...
 vmap aa VGo1G
 
-" run specs with thoughtbot/vim-rspec
-" RSpec.vim mappings
-" map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-map <Leader>c :call RunCurrentSpecFile()<CR>
+" Run tests with vim-test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
