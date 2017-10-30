@@ -12,10 +12,14 @@ set termguicolors
 "endif                                                                                                                                 
 call plug#begin('~/.config/nvim/plugged')   
 
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'baopham/vim-nerdtree-unfocus'
+Plug 'Yggdroot/indentLine'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-bundler'
@@ -40,6 +44,13 @@ Plug 'vim-syntastic/syntastic'
 Plug 'eugen0329/vim-esearch'
 Plug 'ap/vim-css-color'
 Plug 'fmoralesc/nlanguagetool.nvim'
+Plug 'KabbAmine/zeavim.vim', {'on': [
+			\	'Zeavim', 'Docset',
+			\	'<Plug>Zeavim',
+			\	'<Plug>ZVVisSelection',
+			\	'<Plug>ZVKeyDocset',
+			\	'<Plug>ZVMotion'
+			\ ]}
 " vim-devicons must load last
 Plug 'ryanoasis/vim-devicons'
 
@@ -68,8 +79,14 @@ let g:esearch = {
   \ 'use':        ['visual', 'hlsearch', 'last', 'word_under_cursor'],
   \}
 
+	
+
 " Use system clipboard
 set clipboard+=unnamedplus
+
+
+" <Esc> to exit terminal-mode:
+:tnoremap <Esc> <C-\><C-n>
 
 " use tab to complete words
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -82,7 +99,7 @@ function! NerdTreeOpen()
     return exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
 endfunction
 
-if (NerdTreeOpen())
+if exists(NerdTreeOpen())
     nmap <silent> <C-D> :NERDTreeToggle<CR>
 endif
 
@@ -127,6 +144,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -142,3 +161,8 @@ cabbrev CL call nlanguagetool#call()
 
 " Show when lines extend past column 80
 highlight ColorColumn ctermfg=208 ctermbg=Black
+
+
+" Reselect visual block after indent
+vnoremap < <gv
+vnoremap > >gv
