@@ -67,9 +67,19 @@ let g:lightline = {
       \             [ 'readonly', 'filename', 'modified', 'gitbranch' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'fugitive#head',
+      \   'filetype': 'DevIconFileType',
+      \   'fileformat': 'DevIconFileFormat'
       \ },
       \ }
+
+function! DevIconFileType()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : '') : ''
+endfunction
+
+function! DevIconFileFormat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
 
 let g:esearch = {
   \ 'adapter':    'ag',
