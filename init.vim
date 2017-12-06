@@ -14,11 +14,13 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
+" Plug 'ap/vim-buftabline'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'baopham/vim-nerdtree-unfocus'
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
+Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -37,6 +39,7 @@ Plug 'roxma/ncm-rct-complete'
 Plug 'calebeby/ncm-css'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mxw/vim-jsx'
+Plug 'chrisbra/csv.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'vim-ruby/vim-ruby'
@@ -63,7 +66,7 @@ colorscheme onedark
 let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
+      \   'left': [ [ 'mode' ],
       \             [ 'readonly', 'filename', 'modified', 'gitbranch' ] ]
       \ },
       \ 'component_function': {
@@ -88,6 +91,22 @@ let g:esearch = {
   \ 'batch_size': 1000,
   \ 'use':        ['visual', 'hlsearch', 'last', 'word_under_cursor'],
   \}
+
+" for some reason they don't work
+" esearch settings
+" call esearch#out#win#map('t',       'tab')
+" call esearch#out#win#map('i',       'split')
+" call esearch#out#win#map('s',       'vsplit')
+" call esearch#out#win#map('<Enter>', 'open')
+" call esearch#out#win#map('o',       'open')
+
+"    Open silently (keep focus on the results window)
+" call esearch#out#win#map('T', 'tab-silent')
+" call esearch#out#win#map('I', 'split-silent')
+" call esearch#out#win#map('S', 'vsplit-silent')
+
+
+let g:closetag_filenames = '*.jsx'
 
 	
 
