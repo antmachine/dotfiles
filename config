@@ -1,0 +1,44 @@
+[global_config]
+  suppress_multiple_term_dialog = True
+[keybindings]
+  go_down = <Primary>Down
+  go_left = <Primary>Left
+  go_right = <Primary>Right
+  go_up = <Primary>Up
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#363636"
+    cursor_color = "#fc398c"
+    cursor_color_fg = False
+    font = Inconsolata Nerd Font Mono Medium 12
+    foreground_color = "#ffffff"
+    login_shell = True
+    palette = "#1d1d1d:#fa4986:#a6e230:#e5d972:#0893d8:#983cff:#52b6d8:#c6c6c6:#686868:#f97fac:#bce270:#fff17e:#0abdff:#bb9eff:#60d6ff:#ffffff"
+    scrollback_lines = 100000
+    show_titlebar = False
+    use_system_font = False
+  [[iTerm]]
+    background_color = "#363636"
+    cursor_color = "#fc398c"
+    cursor_color_fg = False
+    font = Inconsolata Nerd Font Mono Medium 12
+    foreground_color = "#ffffff"
+    login_shell = True
+    palette = "#1d1d1d:#fa4986:#a6e230:#e5d972:#0893d8:#983cff:#52b6d8:#c6c6c6:#686868:#f97fac:#bce270:#fff17e:#0abdff:#bb9eff:#60d6ff:#ffffff"
+    scrollback_lines = 100000
+    show_titlebar = False
+    use_system_font = False
+  [[std_default]]
+    cursor_color = "#aaaaaa"
+    login_shell = True
+    scrollback_lines = 100000
+    show_titlebar = False
