@@ -7,12 +7,67 @@
   go_up = <Primary>Up
 [layouts]
   [[default]]
+    show_titlebar = False
     [[[child1]]]
       parent = window0
       type = Terminal
     [[[window0]]]
       parent = ""
       type = Window
+  [[core_dev]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = 1c1f6486-8951-4167-8996-af80d5e15eb8
+      last_active_window = True
+      maximised = True
+      order = 0
+      parent = ""
+      position = 0:0
+      size = 1440, 863
+      title = antmachine@localhost: ~/brivity-core
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      position = 239
+      ratio = 0.278554778555
+      type = VPaned
+    [[[child2]]]
+      order = 0
+      parent = child1
+      position = 471
+      ratio = 0.328222996516
+      type = HPaned
+    [[[child4]]]
+      order = 1
+      parent = child2
+      position = 476
+      ratio = 0.494288681205
+      type = HPaned
+    [[[terminal3]]]
+      order = 0
+      parent = child2
+      profile = default
+      type = Terminal
+      uuid = de7bba06-66c4-40c1-b1c9-2d060e2da822
+    [[[terminal5]]]
+      order = 0
+      parent = child4
+      profile = default
+      type = Terminal
+      uuid = b4797285-05ae-4359-9d4a-8c410fa73c3a
+    [[[terminal6]]]
+      order = 1
+      parent = child4
+      profile = default
+      type = Terminal
+      uuid = 595970ab-2efc-453b-a03e-ecaf5b8c3224
+    [[[terminal7]]]
+      order = 1
+      parent = child1
+      profile = default
+      type = Terminal
+      uuid = 1c1f6486-8951-4167-8996-af80d5e15eb8
 [plugins]
 [profiles]
   [[default]]
