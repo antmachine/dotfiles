@@ -51,7 +51,7 @@ ZSH_THEME="muse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rake rails zsh-autosuggestions)
+plugins=(git rake rails zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,6 +86,7 @@ source $ZSH/oh-my-zsh.sh
  alias gitconfig="sudo nvim ~/.gitconfig"
  alias put="git push origin HEAD"
  alias go="git open"
+ alias be="bundle exec"
 
  alias core="cd ~/brivity-core"
  alias bvs="cd ~/brivity-valuations"
@@ -112,6 +113,9 @@ export NVM_DIR="/home/anthonysallows/.nvm"
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# system info
+archeyjs
 
 # entertain and enlighten
 echo "antmachine" | figlet | lolcat
