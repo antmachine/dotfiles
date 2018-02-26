@@ -12,6 +12,17 @@ set termguicolors
 "endif                                                                                                                                 
 call plug#begin('~/.config/nvim/plugged')   
 
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    if has('nvim')
+      !cargo build --release
+    else
+      !cargo build --release --no-default-features --features json-rpc
+    endif
+  endif
+endfunction
+
+
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 " Plug 'ap/vim-buftabline'
@@ -37,6 +48,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/ncm-rct-complete'
 Plug 'calebeby/ncm-css'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mxw/vim-jsx'
 Plug 'chrisbra/csv.vim'
@@ -54,6 +66,7 @@ Plug 'KabbAmine/zeavim.vim', {'on': [
 			\	'<Plug>ZVKeyDocset',
 			\	'<Plug>ZVMotion'
 			\ ]}
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 " vim-devicons must load last
 Plug 'ryanoasis/vim-devicons'
 
@@ -62,6 +75,7 @@ call plug#end()
 
 syntax on
 colorscheme onedark
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 let g:lightline = {
       \ 'colorscheme': 'onedark',
@@ -87,12 +101,14 @@ endfunction
 let g:esearch = {
   \ 'adapter':    'ag',
   \ 'backend':    'nvim',
-  \ 'out':        'qflist',
+  \ 'out':        'win',
   \ 'batch_size': 1000,
   \ 'use':        ['visual', 'hlsearch', 'last', 'word_under_cursor'],
   \}
 
-" for some reason they don't work
+hi ESearchMatch ctermfg=black ctermbg=white guifg=black guibg=#fff17e
+
+" get these to work in quickfix?
 " esearch settings
 " call esearch#out#win#map('t',       'tab')
 " call esearch#out#win#map('i',       'split')
