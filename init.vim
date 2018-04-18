@@ -49,13 +49,15 @@ Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/ncm-rct-complete'
 Plug 'calebeby/ncm-css'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug '/usr/bin/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mxw/vim-jsx'
 Plug 'chrisbra/csv.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'vim-ruby/vim-ruby'
-Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 Plug 'eugen0329/vim-esearch'
 Plug 'ap/vim-css-color'
 Plug 'fmoralesc/nlanguagetool.nvim'
@@ -183,23 +185,6 @@ iab pry binding.pry
 
 " tn makes new empty tab
 cab tn tabnew
-
-" recommended syntastic settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = 'npm run lint --'
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" set height of the syntastic location window
-let g:syntastic_loc_list_height=5
-
-" shortcut to toggle syntastic in/ out of passive mode
-cabbrev ST SyntasticToggleMode
 
 " check with lanugage tool need 'copen' command to see them
 cabbrev CL call nlanguagetool#call()
