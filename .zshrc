@@ -73,6 +73,9 @@ source $ZSH/oh-my-zsh.sh
 # ssh
  export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+# fzf
+#export FZF_DEFAULT_COMMAND='ag --ignore node_modules -g'
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -103,6 +106,9 @@ source $ZSH/oh-my-zsh.sh
 
  alias stagerc="heroku run rails c --app brivity-staging"
  alias stagelogs="heroku logs --tail --app brivity-staging"
+
+ alias tasksneakers="WORKERS=MilestoneSubscriber,TaskSubscriber,TaskableStatusSubscriber bundle exec rake sneakers:run"
+ alias coresneakers="WORKERS=TaskSubscriber,MilestoneSubscriber bundle exec rake sneakers:run"
 
 # disable ctrl-s so can save in vim
 stty -ixon
