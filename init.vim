@@ -43,7 +43,7 @@ Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-vinegar'
+"Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter'
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/ncm-rct-complete'
@@ -58,16 +58,16 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'vim-ruby/vim-ruby'
 Plug 'w0rp/ale'
-Plug 'eugen0329/vim-esearch'
+"Plug 'eugen0329/vim-esearch'
 Plug 'ap/vim-css-color'
 Plug 'fmoralesc/nlanguagetool.nvim'
-Plug 'KabbAmine/zeavim.vim', {'on': [
-			\	'Zeavim', 'Docset',
-			\	'<Plug>Zeavim',
-			\	'<Plug>ZVVisSelection',
-			\	'<Plug>ZVKeyDocset',
-			\	'<Plug>ZVMotion'
-			\ ]}
+"Plug 'KabbAmine/zeavim.vim', {'on': [
+"			\	'Zeavim', 'Docset',
+"			\	'<Plug>Zeavim',
+"			\	'<Plug>ZVVisSelection',
+"			\	'<Plug>ZVKeyDocset',
+"			\	'<Plug>ZVMotion'
+"			\ ]}
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 " vim-devicons must load last
 Plug 'ryanoasis/vim-devicons'
@@ -100,33 +100,11 @@ function! DevIconFileFormat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
-let g:esearch = {
-  \ 'adapter':    'ag',
-  \ 'backend':    'nvim',
-  \ 'out':        'win',
-  \ 'batch_size': 1000,
-  \ 'use':        ['visual', 'hlsearch', 'last', 'word_under_cursor'],
-  \}
-
-hi ESearchMatch ctermfg=black ctermbg=white guifg=black guibg=#fff17e
-
-" get these to work in quickfix?
-" esearch settings
-" call esearch#out#win#map('t',       'tab')
-" call esearch#out#win#map('i',       'split')
-" call esearch#out#win#map('s',       'vsplit')
-" call esearch#out#win#map('<Enter>', 'open')
-" call esearch#out#win#map('o',       'open')
-
-"    Open silently (keep focus on the results window)
-" call esearch#out#win#map('T', 'tab-silent')
-" call esearch#out#win#map('I', 'split-silent')
-" call esearch#out#win#map('S', 'vsplit-silent')
-
-
 let g:closetag_filenames = '*.jsx'
 
 	
+" shortcut to toggle ALE on/off
+cabbrev AT :ALEToggle<CR>
 
 " Use system clipboard
 set clipboard+=unnamedplus
@@ -173,9 +151,30 @@ noremap <C-K> <C-W>k
 noremap <C-L> <C-W>l
 noremap <C-H> <C-W>h
 
+" Creating splits with empty buffers in all directions
+nnoremap <Leader>hn :leftabove  vnew<CR>
+nnoremap <Leader>ln :rightbelow vnew<CR>
+nnoremap <Leader>kn :leftabove  new<CR>
+nnoremap <Leader>jn :rightbelow new<CR>
+
 " map ctrl-s to save (write) disabled in .zshrc for terminal pausing
 inoremap <C-s> <esc>:w<cr>
 nnoremap <C-s> :w<cr>
+
+" Use ctrl-p to search project for files with fzf
+" - via Gfiles which respects .gitignore
+nnoremap <c-p> :GFiles<cr>
+
+" Search for word under cursor with Ag fzf
+function! SearchWordWithAg()
+  execute 'Ag' expand('<cword>')
+endfunction
+
+nnoremap <silent> K :call SearchWordWithAg()<CR>
+
+
+" Search project for word
+nnoremap <c-f> :Ag 
 
 " ERB tags snippet
 imap <C-t> <%= %><Left><Left><Left>
@@ -185,6 +184,7 @@ iab pry binding.pry
 
 " tn makes new empty tab
 cab tn tabnew
+
 
 " check with lanugage tool need 'copen' command to see them
 cabbrev CL call nlanguagetool#call()

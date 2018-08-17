@@ -51,7 +51,7 @@ ZSH_THEME="muse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rake rails zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git rake rails zsh-autosuggestions zsh-syntax-highlighting thefuck)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -126,3 +126,6 @@ archeyjs
 # entertain and enlighten
 echo "antmachine" | figlet | lolcat
 fortune | cowsay
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/home/antmachine/.cache/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
