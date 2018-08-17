@@ -7,7 +7,6 @@
   go_up = <Primary>Up
 [layouts]
   [[default]]
-    show_titlebar = False
     [[[child1]]]
       parent = window0
       type = Terminal
