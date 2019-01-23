@@ -22,8 +22,14 @@ function! BuildComposer(info)
   endif
 endfunction
 
+"langurage compatability 
+Plug 'vim-ruby/vim-ruby'
+Plug 'elixir-editors/vim-elixir'
+Plug 'mxw/vim-jsx'
+Plug 'kchmck/vim-coffee-script'
 
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
+Plug 'antmachine/palenight.vim'
 Plug 'itchyny/lightline.vim'
 " Plug 'ap/vim-buftabline'
 Plug 'scrooloose/nerdtree'
@@ -43,6 +49,7 @@ Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
+Plug 'posva/vim-vue'
 "Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter'
 Plug 'roxma/nvim-completion-manager'
@@ -51,16 +58,14 @@ Plug 'calebeby/ncm-css'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'kchmck/vim-coffee-script'
-Plug 'mxw/vim-jsx'
-Plug 'chrisbra/csv.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-Plug 'vim-ruby/vim-ruby'
+Plug 'chrisbra/csv.vim'
+Plug 'google/vim-searchindex'
 Plug 'w0rp/ale'
 "Plug 'eugen0329/vim-esearch'
 Plug 'ap/vim-css-color'
-Plug 'fmoralesc/nlanguagetool.nvim'
+"Plug 'fmoralesc/nlanguagetool.nvim'
 "Plug 'KabbAmine/zeavim.vim', {'on': [
 "			\	'Zeavim', 'Docset',
 "			\	'<Plug>Zeavim',
@@ -76,11 +81,15 @@ Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 syntax on
-colorscheme onedark
+" colorscheme onedark
+set background=dark
+colorscheme palenight
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
+" let g:lightline.colorscheme = 'palenight'
+let g:palenight_terminal_italics=1
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'colorscheme': 'one',
       \ 'active': {
       \   'left': [ [ 'mode' ],
       \             [ 'readonly', 'filename', 'modified', 'gitbranch' ] ]
@@ -100,7 +109,7 @@ function! DevIconFileFormat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
-let g:closetag_filenames = '*.jsx'
+let g:closetag_filenames = '*.jsx, *.vue'
 
 	
 " shortcut to toggle ALE on/off
