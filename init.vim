@@ -22,11 +22,31 @@ function! BuildComposer(info)
   endif
 endfunction
 
-"langurage compatability 
+"language compatability 
 Plug 'vim-ruby/vim-ruby'
-Plug 'elixir-editors/vim-elixir'
 Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
+
+"Ruby stuff
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+
+"Git stuff
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+"Completion
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'fgrsnau/ncm2-otherbuf'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-github'
+Plug 'filipekiss/ncm2-look.vim'
+Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+Plug 'ncm2/ncm2-tern'
+Plug 'pbogut/ncm2-alchemist'
 
 " Plug 'joshdick/onedark.vim'
 Plug 'antmachine/palenight.vim'
@@ -39,27 +59,20 @@ Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-rails'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-rake'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'posva/vim-vue'
 "Plug 'tpope/vim-vinegar'
-Plug 'airblade/vim-gitgutter'
-Plug 'roxma/nvim-completion-manager'
-Plug 'roxma/ncm-rct-complete'
-Plug 'calebeby/ncm-css'
+"Plug 'roxma/nvim-completion-manager'
+"Plug 'roxma/ncm-rct-complete'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'chrisbra/csv.vim'
 Plug 'google/vim-searchindex'
 Plug 'w0rp/ale'
@@ -86,6 +99,19 @@ set background=dark
 colorscheme palenight
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
+"CSS, SASS, etc completion
+"taken from github.com/ncm2/ncm2-cssomni
+call ncm2#register_source({'name' : 'css',
+            \ 'priority': 9, 
+            \ 'subscope_enable': 1,
+            \ 'scope': ['css', 'scss', 'less', 'sass'],
+            \ 'mark': 'css',
+            \ 'word_pattern': '[\w\-]+',
+            \ 'complete_pattern': ':\s*',
+            \ 'on_complete': ['ncm2#on_complete#omni',
+            \               'csscomplete#CompleteCSS'],
+            \ })
+
 " let g:lightline.colorscheme = 'palenight'
 let g:palenight_terminal_italics=1
 let g:lightline = {
@@ -111,7 +137,6 @@ endfunction
 
 let g:closetag_filenames = '*.jsx, *.vue'
 
-	
 " shortcut to toggle ALE on/off
 cabbrev AT :ALEToggle<CR>
 
@@ -122,9 +147,16 @@ set clipboard+=unnamedplus
 " <Esc> to exit terminal-mode:
 :tnoremap <Esc> <C-\><C-n>
 
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" IMPORTANT: :help Ncm2PopupOpen for more information
+" (menuone, noselect are optiontal)
+set completeopt=noinsert,menuone,noselect
+
 " use tab to complete words
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " NerdTree opens to file, or toggles closed if already open
 nmap <silent> <C-D> :NERDTreeFind<CR>
