@@ -7,7 +7,7 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="muse"
+ ZSH_THEME="muse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,7 +51,7 @@ ZSH_THEME="muse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rake rails zsh-autosuggestions zsh-syntax-highlighting thefuck)
+plugins=(git rails zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,11 +100,14 @@ source $ZSH/oh-my-zsh.sh
  alias marketing="cd ~/brivity-marketing"
  alias notifications="cd ~/notifications"
  alias cma="cd ~/brivity-cma"
+ alias assplans="cd ~/assigned-plans"
+ alias sud="cd ~/single-user"
 
- alias prodrc="heroku run rails c --app brivity"
+ alias prodrc="heroku run rails c --size=performance-l --app brivity"
  alias prodlogs="heroku logs --tail --app brivity"
 
- alias stagerc="heroku run rails c --app brivity-staging"
+ alias stagerc="heroku run rails c --size=performance-l --app brivity-staging"
+ alias acceptrc="heroku run rails c --size=performance-l --app brivity-acceptance"
  alias stagelogs="heroku logs --tail --app brivity-staging"
 
  alias tasksneakers="WORKERS=MilestoneSubscriber,TaskSubscriber,TaskableStatusSubscriber bundle exec rake sneakers:run"
@@ -112,6 +115,9 @@ source $ZSH/oh-my-zsh.sh
 
 # disable ctrl-s so can save in vim
 stty -ixon
+
+# set theme for bat (cat with wings)
+export BAT_THEME="TwoDark"
 
 export NVM_DIR="/home/anthonysallows/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -129,3 +135,9 @@ fortune | cowsay
 
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/home/antmachine/.cache/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+# kitty compatible autocomplete
+# autoload -Uz compinit
+# compinit
+# kitty + complete setup zsh | source /dev/stdin
+fpath=($fpath "/home/antmachine/.zfunctions")
