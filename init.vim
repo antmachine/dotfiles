@@ -40,7 +40,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
-Plug 'fgrsnau/ncm2-otherbuf'
+Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-github'
 Plug 'filipekiss/ncm2-look.vim'
