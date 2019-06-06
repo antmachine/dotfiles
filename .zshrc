@@ -2,18 +2,25 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/antmachine/.oh-my-zsh
+export ZSH="/Users/antmachine/.oh-my-zsh"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
- ZSH_THEME="muse"
+ZSH_THEME="muse"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
@@ -41,13 +48,17 @@
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
  HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
@@ -57,7 +68,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/opt/erlang/lib/erlang/man:$MANPATH"
+
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -73,18 +85,18 @@ source $ZSH/oh-my-zsh.sh
 # ssh
  export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# fzf
-#export FZF_DEFAULT_COMMAND='ag --ignore node_modules -g'
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
  alias zshconfig="sudo nvim ~/.zshrc"
  alias vimconfig="sudo vim ~/.vimrc"
  alias nvimconfig="sudo nvim ~/.config/nvim/init.vim"
+ alias ctags="`brew --prefix`/bin/ctags"
  alias tmuxconfig="sudo nvim ~/.tmux.conf"
  alias gitconfig="sudo nvim ~/.gitconfig"
  alias put="git push origin HEAD"
@@ -102,8 +114,10 @@ source $ZSH/oh-my-zsh.sh
  alias cma="cd ~/brivity-cma"
  alias assplans="cd ~/assigned-plans"
  alias sud="cd ~/single-user"
+ alias anstow="cd ~/ansible-tower"
 
  alias prodrc="heroku run rails c --size=performance-l --app brivity"
+ alias bvsrc="heroku run rails c --size=performance-l --app brivity-valuations"
  alias prodlogs="heroku logs --tail --app brivity"
 
  alias stagerc="heroku run rails c --size=performance-l --app brivity-staging"
@@ -111,7 +125,8 @@ source $ZSH/oh-my-zsh.sh
  alias stagelogs="heroku logs --tail --app brivity-staging"
 
  alias tasksneakers="WORKERS=MilestoneSubscriber,TaskSubscriber,TaskableStatusSubscriber bundle exec rake sneakers:run"
- alias coresneakers="WORKERS=TaskSubscriber,MilestoneSubscriber bundle exec rake sneakers:run"
+ alias coresneakers="WORKERS=TaskSubscriber,MilestoneSubscriber,AssignableStateSubscriber bundle exec rake sneakers:run"
+ alias assplansneakers="WORKERS=TaskSubscriber,InteractionSubscriber,PersonTransferredSubscriber,PersonUpdatedSubscriber,MilestoneSubscriber,TransactionUpdatedSubscriber bundle exec rake sneakers:run"
 
 # disable ctrl-s so can save in vim
 stty -ixon
@@ -119,25 +134,22 @@ stty -ixon
 # set theme for bat (cat with wings)
 export BAT_THEME="TwoDark"
 
-export NVM_DIR="/home/anthonysallows/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-export PATH="$HOME/.yarn/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
+# load rbenv
 eval "$(rbenv init -)"
 
 # system info
-archeyjs
+archey
 
 # entertain and enlighten
 echo "antmachine" | figlet | lolcat
 fortune | cowsay
 
-# heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=/home/antmachine/.cache/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
+export PATH="/usr/local/Cellar/openvpn/2.4.6/sbin:$PATH"
 
-# kitty compatible autocomplete
-# autoload -Uz compinit
-# compinit
-# kitty + complete setup zsh | source /dev/stdin
-fpath=($fpath "/home/antmachine/.zfunctions")
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/Users/antmachine/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion

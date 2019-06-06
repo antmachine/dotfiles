@@ -70,7 +70,7 @@ Plug 'posva/vim-vue'
 "Plug 'roxma/nvim-completion-manager'
 "Plug 'roxma/ncm-rct-complete'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug '/usr/bin/fzf'
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chrisbra/csv.vim'
@@ -87,6 +87,7 @@ Plug 'ap/vim-css-color'
 "			\	'<Plug>ZVMotion'
 "			\ ]}
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+
 " vim-devicons must load last
 Plug 'ryanoasis/vim-devicons'
 
@@ -237,3 +238,4 @@ highlight ColorColumn ctermfg=208 ctermbg=Black
 " Reselect visual block after indent
 vnoremap < <gv
 vnoremap > >gv
+
