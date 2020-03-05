@@ -28,25 +28,26 @@ Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
 
 "Ruby stuff
-Plug 'tpope/vim-bundler'
+" Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
+" Plug 'tpope/vim-rake'
 
 "Git stuff
 Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'airblade/vim-gitgutter'
 
 "Completion
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
-Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }
+Plug 'fgrsnau/ncm2-otherbuf'
 Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-github'
-Plug 'filipekiss/ncm2-look.vim'
+"Plug 'ncm2/ncm2-github'
+"Plug 'filipekiss/ncm2-look.vim' => this is for normal English words
 Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
 Plug 'ncm2/ncm2-tern'
-Plug 'pbogut/ncm2-alchemist'
+"Plug 'pbogut/ncm2-alchemist' => Elixir completion
 
 " Plug 'joshdick/onedark.vim'
 Plug 'antmachine/palenight.vim'
@@ -70,12 +71,12 @@ Plug 'posva/vim-vue'
 "Plug 'roxma/nvim-completion-manager'
 "Plug 'roxma/ncm-rct-complete'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug '/usr/local/opt/fzf'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chrisbra/csv.vim'
 Plug 'google/vim-searchindex'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 "Plug 'eugen0329/vim-esearch'
 Plug 'ap/vim-css-color'
 "Plug 'fmoralesc/nlanguagetool.nvim'
@@ -137,6 +138,7 @@ function! DevIconFileFormat()
 endfunction
 
 let g:closetag_filenames = '*.jsx, *.vue'
+let g:fugitive_gitlab_domains = ['https://gitlab.brivity.com']
 
 " shortcut to toggle ALE on/off
 cabbrev AT :ALEToggle<CR>
@@ -144,6 +146,8 @@ cabbrev AT :ALEToggle<CR>
 " Use system clipboard
 set clipboard+=unnamedplus
 
+" See preview of command in buffer
+set inccommand=nosplit
 
 " <Esc> to exit terminal-mode:
 :tnoremap <Esc> <C-\><C-n>
